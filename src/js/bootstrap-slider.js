@@ -430,7 +430,7 @@ const windowIsDefined = (typeof window === "object");
 			var updateSlider = false;
 			var parent = this.element.parentNode;
 			var sliderTrackSelection;
-			var sliderTrackLow, sliderTrackHigh;
+			var sliderTrackLow, sliderTrackMid, sliderTrackHigh;
 			var sliderMinHandle;
 			var sliderMaxHandle;
 
@@ -447,6 +447,9 @@ const windowIsDefined = (typeof window === "object");
 
 				sliderTrackLow = document.createElement("div");
 				sliderTrackLow.className = "slider-track-low";
+
+				sliderTrackMid = document.createElement("div");
+				sliderTrackMid.className = "slider-track-mid";
 
 				sliderTrackSelection = document.createElement("div");
 				sliderTrackSelection.className = "slider-selection";
@@ -467,6 +470,7 @@ const windowIsDefined = (typeof window === "object");
 				sliderMaxHandle.setAttribute('aria-valuemax', this.options.max);
 
 				sliderTrack.appendChild(sliderTrackLow);
+				sliderTrack.appendChild(sliderTrackMid);
 				sliderTrack.appendChild(sliderTrackSelection);
 				sliderTrack.appendChild(sliderTrackHigh);
 
@@ -699,6 +703,7 @@ const windowIsDefined = (typeof window === "object");
 			}
 
 			this.trackLow = sliderTrackLow || this.trackLow;
+			this.trackMid = sliderTrackMid || this.trackMid;
 			this.trackSelection = sliderTrackSelection || this.trackSelection;
 			this.trackHigh = sliderTrackHigh || this.trackHigh;
 
@@ -1381,6 +1386,9 @@ const windowIsDefined = (typeof window === "object");
 						this.trackLow.style.left = '0';
 					}
 					this.trackLow.style.width = Math.min(positionPercentages[0], positionPercentages[1]) +'%';
+
+					this.trackMid.style.left = Math.min(positionPercentages[0], positionPercentages[1]) + '%';
+					// this.trackMid.style.width = Math.abs(positionPercentages[0] - positionPercentages[1]) + '%';
 
 					if(this.stylePos==='right') {
 						this.trackSelection.style.right = Math.min(positionPercentages[0], positionPercentages[1]) + '%';
